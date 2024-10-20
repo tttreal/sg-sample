@@ -3,8 +3,8 @@ services:
   nginx:
     build: ./nginx
     tty: true
-    ports:
-      - "80:80"
+    #ports:
+    #  - "80:80"
     volumes:
       - ./volume/www/var/www:/var/www
       - ./volume/www/var/log/nginx:/var/log/nginx
