@@ -31,6 +31,8 @@ ALLOWED_HOSTS = [
     "sg-sample.aoisoft.work",
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://sg-sample.aoisoft.work','https://*.127.0.0.1']
+
 
 # Application definition
 
