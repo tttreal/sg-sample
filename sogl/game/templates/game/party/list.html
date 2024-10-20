@@ -1,0 +1,46 @@
+{% extends 'game/base.html' %}
+
+{% block breadcrumb_list %}
+{% include "game/breadcrumb_list.html" with breadcrumb_list="/home /party/list" %}
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">パーティ一覧</h1>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Party ID</th>
+            <th>Name</th>
+            <th>パーティの合計パワー</th>
+            <th>編集</th>
+            <th>クエスト用にする</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user_party_datum in user_party_data %}
+        <tr>
+            <td>{{ user_party_datum.party_id }}</td>
+            <td>{{ user_party_datum.name }}</td>
+            <td>{{ user_party_datum.total_power }}</td>
+            <td><a href="edit?party_id={{ user_party_datum.party_id }}" class="text-primary">編集する</a></td>
+            <td>
+                {% if user_party_datum.party_id == user_select_party_id %}
+                選択中
+                {% else %}
+                <form method="post" action="set_use_party">
+                    {% csrf_token %}
+                    <input type="hidden" name="party_id" value="{{ user_party_datum.party_id }}">
+                    <input type="submit" value="選択する">
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            {% for chara_datum in user_party_datum.chara_data %}
+            <td>キャラ： {{ chara_datum.name }}(Lv. {{ chara_datum.level }})</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

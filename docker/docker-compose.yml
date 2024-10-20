@@ -1,0 +1,23 @@
+services:
+  mysql:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlpass
+    ports:
+      - 3306:3306
+    volumes:
+      - ./volume/mysql/var/lib/mysql:/var/lib/mysql
+
+  redis:
+    build: ./redis
+    ports:
+      - 6379:6379
+
+  python:
+    build: ./python
+    tty: true
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ../sogl:/code

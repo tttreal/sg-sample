@@ -1,0 +1,20 @@
+{% extends 'game/base.html' %}
+
+{% block breadcrumb_list %}
+{% include "game/breadcrumb_list.html" with breadcrumb_list="/home /present/debug_send" %}
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">プレゼント送付(デバッグ用機能)</h1>
+<form method="post" action="debug_send_exec">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="rewards">プレゼント内容(json)</label>
+        <textarea name="rewards">[{"type":"chara", "id":1, "amount":1}]</textarea>
+        <br>
+        <label for="direct">直接付与する？</label>
+        <input type="checkbox" id="direct" name="direct">
+    </div>
+    <button type="submit" class="btn btn-primary">送付する</button>
+</form>
+{% endblock %}

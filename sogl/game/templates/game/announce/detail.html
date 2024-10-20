@@ -1,0 +1,11 @@
+{% extends 'game/base.html' %}
+
+{% block breadcrumb_list %}
+{% include "game/breadcrumb_list.html" with breadcrumb_list="/home /announce/detail" %}
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">お知らせ</h1>
+{{ announce.body|safe }}
+{% endblock %}
+

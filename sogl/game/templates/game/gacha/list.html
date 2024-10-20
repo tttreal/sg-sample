@@ -1,0 +1,34 @@
+{% extends 'game/base.html' %}
+
+{% block breadcrumb_list %}
+{% include "game/breadcrumb_list.html" with breadcrumb_list="/home /gacha/list" %}
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">ガチャ一覧</h1>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Gacha ID</th>
+            <th>Name</th>
+            <th>紹介文</th>
+            <th>引く</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for gacha_info in gacha_infos %}
+        <form method="post" action="exec">
+            {% csrf_token %}
+            <input type="hidden" name="gacha_id" value="{{ gacha_info.gacha_id }}">
+            <input type="hidden" name="exec_count" value="{{ gacha_info.exec_count }}">
+            <tr>
+                <td>{{ gacha_info.gacha_id }}</td>
+                <td>{{ gacha_info.name }}</td>
+                <td>{{ gacha_info.introduction }}</td>
+                <td>{{ gacha_info.cost_explanation }} で <input type="submit" value="引く"></td>
+            </tr>
+        </form>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'game/base.html' %}
+
+{% block breadcrumb_list %}
+{% include "game/breadcrumb_list.html" with breadcrumb_list="/home /event/top" %}
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{{ event.name }} トップ</h1>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>説明</th>
+            <th>開催期間</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ event.description }}</td>
+            <td>{{ event.open_at|date:"Y-m-j H:i:s" }} ～ {{ event.close_at|date:"Y-m-j H:i:s" }}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+
+<h1 class="mb-4">イベントクエスト</h1>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Quest ID</th>
+            <th>Name</th>
+            <th>パワー</th>
+            <th>必要スタミナ</th>
+            <th>クリア済みか？</th>
+            <th>挑戦</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for quest_info in quest_infos %}
+        <tr>
+            <td>{{ quest_info.quest_id }}</td>
+            <td>{{ quest_info.name }}</td>
+            <td>{{ quest_info.power }}</td>
+            <td>{{ quest_info.need_stamina }}</td>
+            <td>{{ quest_info.is_cleared }}</td>
+            <td>
+                <form method="post" action="exec_quest">
+                    {% csrf_token %}
+                    <input type="hidden" name="event_id" value="{{ event.id }}">
+                    <input type="hidden" name="quest_id" value="{{ quest_info.quest_id }}">
+                    <input type="submit" value="挑戦する">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h1 class="mb-4">イベントポイントランキング</h1>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>順位</th>
+            <th>名前</th>
+            <th>スコア</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ranking_info in ranking_infos %}
+        <tr>
+            <td>{{ ranking_info.rank }}</td>
+            <td>{{ ranking_info.user.name }}</td>
+            <td>{{ ranking_info.point }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

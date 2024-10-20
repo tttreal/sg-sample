@@ -1,0 +1,12 @@
+services:
+  python:
+    build:
+      args:
+        ENV: dev
+    ports:
+      - 8000:8000
+      - 5678:5678 # for debugging
+    environment:
+      DEBUG: 1
+      SECRET_KEY: aaa
+      entrypoint: python -Xfrozen_modules=off -m debugpy --listen 0.0.0.0:5678 --wait-for-client manage.py runserver 0.0.0.0:8000

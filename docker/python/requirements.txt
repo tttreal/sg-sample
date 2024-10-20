@@ -1,0 +1,7 @@
+Django==4.2.16
+pymysql==1.1.1
+cryptography==43.0.1
+inflection==0.5.1
+django-user-agents==0.4.0
+django-ipware==7.0.1
+redis==5.0.8

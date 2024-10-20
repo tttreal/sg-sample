@@ -1,0 +1,53 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+<div class="h4 font-weight-bold">ユーザー名：{{user.name}}(ID:{{user.id}}) -- スタミナ: {{ user_stamina_info.current_stamina }} / {{ user_stamina_info.max_stamina }}</div>
+
+<h1 class="mb-4">各種ページへのリンク</h1>
+<ul class="list-group">
+    <li class="list-group-item">
+        <a href="chara/list" class="text-primary">キャラ一覧</a>
+    </li>
+    <li class="list-group-item">
+        <a href="party/list" class="text-primary">パーティ一覧</a>
+    </li>
+    <li class="list-group-item">
+        <a href="quest/list" class="text-primary">クエスト一覧</a>
+    </li>
+    <li class="list-group-item">
+        <a href="present/box" class="text-primary">プレゼントBOX</a>
+    </li>
+    <li class="list-group-item">
+        <a href="gacha/list" class="text-primary">ガチャ一覧</a>
+    </li>
+    <li class="list-group-item">
+        <a href="mission/list" class="text-primary">ミッション一覧</a>
+    </li>
+    <li class="list-group-item">
+        <a href="event/top" class="text-primary">イベントTOP</a>
+    </li>
+</ul>
+<hr />
+
+<h1 class="mb-4">デバッグ的機能</h1>
+<ul class="list-group">
+    <li class="list-group-item">
+        <a href="present/debug_send" class="text-primary">プレゼント送付(デバッグ用機能)</a>
+    </li>
+</ul>
+<hr />
+
+{% if announces %}
+<h1 class="mb-4">お知らせ</h1>
+<ul class="list-group">
+    {% for announce in announces %}
+    <li class="list-group-item">
+        <a href="announce/detail?id={{ announce.id }}" class="text-primary">{{ announce.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<hr />
+{% endif %}
+
+{% include "game/points.html" %}
+{% endblock %}

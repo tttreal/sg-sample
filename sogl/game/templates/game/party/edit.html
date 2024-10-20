@@ -1,0 +1,67 @@
+{% extends 'game/base.html' %}
+
+{% load static %}
+
+{% block breadcrumb_list %}
+{% include "game/breadcrumb_list.html" with breadcrumb_list="/home /party/list /party/edit?party_id="|add:party_id %}
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">パーティ編集</h1>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Party ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ user_party_datum.party_id }}</td>
+            <td>{{ user_party_datum.name }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<form id="party-form" method="post" action="/party/edit_exec">
+    {% csrf_token %}
+    <input type="hidden" name="party_id" value="{{party_id}}">
+    <div class="row">
+        {% for chara in chara_data %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="{% static 'game/chara/' %}{{ chara.chara_id }}.jpg" class="card-img-top" alt="{{ chara.name }}" style="width:100px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ chara.name }}</h5>
+                    <p class="card-text">レベル: {{ chara.level }}</p>
+                    <p class="card-text">パワー: {{ chara.power }}</p>
+                    <div class="form-check">
+                        <input class="form-check-input chara-checkbox" type="checkbox" {% if chara.is_in_party %}checked="checked" {% endif %}value="{{ chara.user_chara_id }}" id="chara{{ chara.user_chara_id }}" name="user_chara_ids">
+                        <label class="form-check-label" for="chara{{ chara.user_chara_id }}">
+                            選択
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary" id="confirm-button">決定</button>
+    </div>
+</form>
+
+
+<script>
+    $(document).ready(function() {
+        var maxSelection = 5;
+        $('.chara-checkbox').on('change', function() {
+            if ($('.chara-checkbox:checked').length > maxSelection) {
+                alert('選択できるキャラクターは最大で ' + maxSelection + ' 体までです。');
+                $(this).prop('checked', false);
+            }
+        });
+    });
+</script>
+
+{% endblock %}

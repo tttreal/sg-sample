@@ -1,0 +1,6 @@
+<h1 class="mb-4">保有ポイント一覧</h1>
+<ul class="list-group">
+    {% for point_datum in point_data %}
+    <li class="list-group-item">{{ point_datum.name }}:{{ point_datum.amount }}</li>
+    {% endfor %}
+</ul>

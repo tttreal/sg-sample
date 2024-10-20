@@ -1,0 +1,27 @@
+from django.contrib import admin
+from .models import *
+
+# Register your models here.
+admin.site.register(Chara)
+admin.site.register(Point)
+admin.site.register(User)
+admin.site.register(UserChara)
+admin.site.register(UserPoint)
+admin.site.register(Party)
+admin.site.register(UserParty)
+admin.site.register(UserPartyChara)
+admin.site.register(Quest)
+admin.site.register(UserQuest)
+admin.site.register(UserPresent)
+admin.site.register(Gacha)
+admin.site.register(GachaSlot)
+admin.site.register(LoginBonus)
+admin.site.register(LoginBonusReward)
+admin.site.register(UserLoginBonus)
+admin.site.register(Announce)
+admin.site.register(Mission)
+admin.site.register(UserMission)
+admin.site.register(Event)
+admin.site.register(EventReward)
+admin.site.register(UserEvent)
+admin.site.register(EventQuest)

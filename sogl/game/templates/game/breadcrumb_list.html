@@ -1,0 +1,14 @@
+<style>
+/* 区切り文字を / から > に変更*/
+.breadcrumb-item+.breadcrumb-item::before {
+    content: ">"
+}
+</style>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        {% for i in breadcrumb_list.split %}
+        <li class="breadcrumb-item active"><a title="Breadcrumb Example" href="{{ i }}"><i class="fa fa-home">{{ i }}</i></a></li>
+        {% endfor %}
+    </ol>
+</nav>

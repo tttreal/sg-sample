@@ -1,0 +1,60 @@
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     // "version": "0.2.0",
+//     // "configurations": [
+//     //     {
+//     //         "name": "Python: Current File",
+//     //         "type": "python",
+//     //         "request": "launch",
+//     //         //"program": "${file}",
+//     //         "program": "${file}",
+//     //         "console": "integratedTerminal",
+//     //         "justMyCode": true
+//     //     }
+//     // ],
+// 
+// 
+//     "configurations": [
+//         {
+//             "name": "Python Django",
+//             "type": "python",
+//             "request": "launch",
+//             "program": "${workspaceFolder}/sogl/manage.py",
+//             "args": [
+//                 "runserver"
+//             ],
+//             "django": true,
+//             "justMyCode": true,
+//             "env": {
+//                 "DEBUG": "1",
+//                 "SECRET_KEY": "aa" 
+//             }
+//         }
+//     ]
+// 
+// }
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Remote Attach",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                // "host": "localhost",
+                "host": "172.19.209.255",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/code"
+                }
+            ],
+            "justMyCode": false
+        }
+    ]
+}
