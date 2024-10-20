@@ -15,4 +15,3 @@ RUN pip install -r /tmp/requirements.txt
 # 開発環境の場合のみ追加の依存関係をインストール
 COPY requirements-dev.txt /tmp/
 RUN if [ "$ENV" = "dev" ] ; then pip install -r /tmp/requirements-dev.txt ; fi
-

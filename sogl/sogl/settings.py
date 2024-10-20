@@ -140,6 +140,9 @@ STATICFILES_DIRS = [
     #"/var/www/static/",
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -168,6 +171,9 @@ REDIS_HOST = "redis"
 #REDIS_HOST = "localhost"
 REDIS_PORT = 6379
 REDIS_DB = 0
+
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 # MY STATIC CONSTs
 PARTY_CHARA_MAX_NUM = 5

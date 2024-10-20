@@ -3,8 +3,8 @@ services:
   nginx:
     build: ./nginx
     tty: true
-    #    ports:
-    #      - "80:80"
+    ports:
+      - "80:80"
     volumes:
       - ./volume/www/var/www:/var/www
       - ./volume/www/var/log/nginx:/var/log/nginx
@@ -30,6 +30,9 @@ services:
     environment:
       DEBUG: 0
       SECRET_KEY: aaa
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             gunicorn sogl.wsgi:application --bind 0.0.0.0:8000"
 
 volumes:
   https-portal-data: # Recommended, to avoid re-signing when upgrading HTTPS-PORTAL
