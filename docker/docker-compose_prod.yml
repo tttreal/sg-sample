@@ -10,21 +10,8 @@ services:
       - ./volume/www/var/log/nginx:/var/log/nginx
     depends_on:
       - python
-
-  https-portal:
-    image: steveltn/https-portal:1
-    ports:
-      - '80:80'
-      - '443:443'
-    links:
-      - nginx
-    restart: always
-    environment:
-      DOMAINS: 'sg-sample.aoisoft.work -> http://nginx:80'
-      STAGE: 'production' # Don't use production until staging works
-      # FORCE_RENEW: 'true'
-    volumes:
-      - https-portal-data:/var/lib/https-portal
+    network:
+      - sogl
 
   python:
     environment:
@@ -36,3 +23,7 @@ services:
 
 volumes:
   https-portal-data: # Recommended, to avoid re-signing when upgrading HTTPS-PORTAL
+
+networks:
+  sogl:
+    external: true
