@@ -1,6 +1,6 @@
 version: '3'
 services:
-  nginx:
+  sogl-nginx:
     build: ./nginx
     tty: true
     #ports:
@@ -10,8 +10,9 @@ services:
       - ./volume/www/var/log/nginx:/var/log/nginx
     depends_on:
       - python
-    network:
+    networks:
       - sogl
+      - internal
 
   python:
     environment:
@@ -20,9 +21,8 @@ services:
     command: >
       sh -c "python manage.py collectstatic --noinput &&
              gunicorn sogl.wsgi:application --bind 0.0.0.0:8000"
-
-volumes:
-  https-portal-data: # Recommended, to avoid re-signing when upgrading HTTPS-PORTAL
+    networks:
+      - sogl
 
 networks:
   sogl:
